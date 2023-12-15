@@ -3,27 +3,22 @@ body {
     padding: 0;
     background-image: url("/img/img1.png");
 }
-
 header {
     background-color: #333;
 }
-
 .menu {
     padding: 10px;
     text-align: center;
 }
-
 .menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .menu li {
     display: inline;
     margin-right: 20px;
 }
-
 .menu a {
     text-decoration: none;
     color: #fff;
@@ -31,26 +26,19 @@ header {
     font-size: 16px;
     transition: color 0.3s;
 }
-
 .menu a:hover {
     color: #4caf50;
 }
-
-#postSection {
-    
+#postSection {  
     text-align: center;
     margin: 0 auto; /* Centraliza a section horizontalmente */
     transition: margin-left 0.5s ease-in-out; /* Adiciona uma transição suave ao movimento */
     height: auto;
 }
-
-
-
 h1 {
     text-align: center;
     color: #333;
 }
-
 #postForm {
     max-width: 400px;
     margin: 2px;
@@ -59,7 +47,6 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 .principal {
     max-width: 400px; /* Define a largura máxima da seção */
     margin: 50px auto; /* Centraliza a seção vertical e horizontalmente */
@@ -68,17 +55,14 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 .principal h1 {
     color: #333;
 }
-
 .principal label {
     display: block;
     margin-bottom: 8px;
     color: #333;
 }
-
 .principal input,
 .principal textarea {
     width: 100%;
@@ -89,7 +73,6 @@ h1 {
     border-radius: 4px;
     outline: none;
 }
-
 .principal button {
     background-color: #4caf50;
     color: #fff;
@@ -100,17 +83,14 @@ h1 {
     font-size: 16px;
     transition: background-color 0.3s;
 }
-
 .principal button:hover {
     background-color: #45a049;
 }
-
 label {
     display: block;
     margin-bottom: 8px;
     color: #333;
 }
-
 input, textarea {
     width: 100%;
     padding: 10px;
@@ -120,7 +100,6 @@ input, textarea {
     border-radius: 4px;
     outline: none;
 }
-
 button {
     background-color: #4caf50;
     color: #fff;
@@ -131,17 +110,14 @@ button {
     font-size: 16px;
     transition: background-color 0.3s;
 }
-
 button:hover {
     background-color: #45a049;
 }
-
 #titulo-renderizar {
     margin-top: 20px;
     font-size: 1.2em;
     color: #333;
 }
-
 #conteudo-renderizar {
     color: #555;
 }
@@ -160,7 +136,6 @@ button:hover {
     width: 50vw;
     margin: 0 auto;
 }
-
 footer {
     background-color: #000; /* Cor de fundo preto */
     color: #fff; /* Cor do texto branco */

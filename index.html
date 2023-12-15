@@ -38,33 +38,7 @@
     <footer>
         <p>&copy; 2023 Diego Reis. Todos os direitos reservados.</p>
     </footer>
-    <script>
-        function chamarAPI() {//recebe dados API
-            fetch('https://jsonplaceholder.typicode.com/posts')
-                .then(response => response.json())
-                .then(data => {
-                    const resultadosDiv = document.querySelector("#articleRender");
-                    data.forEach(item => {
-                        // Criar uma nova div para cada item
-                        const itemDiv = document.createElement('div');
-                        // Adicionar título como um elemento de cabeçalho (h2, por exemplo)
-                        const tituloElemento = document.createElement('h2');
-                        tituloElemento.textContent = item.title;
-                        tituloElemento.id = 'titulo-renderizar';
-                        // Adicionar conteúdo como um parágrafo (p, por exemplo)
-                        const conteudoElemento = document.createElement('p');
-                        conteudoElemento.textContent = item.body;
-                        conteudoElemento.id = 'conteudo-renderizar';
-                        // Adicionar elementos de título e conteúdo à div do item
-                        itemDiv.appendChild(tituloElemento);
-                        itemDiv.appendChild(conteudoElemento);
-                        // Adicionar a div do item à div de resultados
-                        resultadosDiv.appendChild(itemDiv);                  
-                        itemDiv.style.borderBottom = '1px solid #ccc';                   
-                    });
-                })
-                .catch(error => console.error('Erro:', error));
-        }           
+    <script>       
         document.addEventListener('DOMContentLoaded', function() {
             chamarAPI();
         });
@@ -74,7 +48,6 @@
             const titulo = document.querySelector("#titulo").value;
             const conteudo = document.querySelector("#conteudo").value;
             const postSection = document.querySelector("#postSection");
-            postSection.classList.add('move-to-left');
             const articleRender = document.querySelector("#articleRender");
             articleRender.style.display = 'block';
             // 
@@ -99,16 +72,34 @@
                 // Renderizar o título e conteúdo do post retornado pela API
                 const tituloRenderizar = document.querySelector("#titulo-renderizar");
                 const conteudoRenderizar = document.querySelector("#conteudo-renderizar");
-                newPostDiv.classList.add('post');
-                newPostDiv.innerHTML = `
-                    <h2 id="titulo-renderizar">${data.title}</h2>
-                    <p id="conteudo-renderizar">${data.body}</p>
-                `;
                 tituloRenderizar.innerHTML = data.title;
                 conteudoRenderizar.innerHTML = data.body;
             })
             .catch(error => console.error('Erro ao postar:', error));
-            chamarAPI();
+            fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => response.json())
+            .then(data => {
+                const resultadosDiv = document.querySelector("#articleRender");
+                data.forEach(item => {
+                    // Criar uma nova div para cada item
+                    const itemDiv = document.createElement('div');
+                    // Adicionar título como um elemento de cabeçalho (h2, por exemplo)
+                    const tituloElemento = document.createElement('h2');
+                    tituloElemento.textContent = item.title;
+                    tituloElemento.id = 'titulo-renderizar';
+                    // Adicionar conteúdo como um parágrafo (p, por exemplo)
+                    const conteudoElemento = document.createElement('p');
+                    conteudoElemento.textContent = item.body;
+                    conteudoElemento.id = 'conteudo-renderizar';
+                    // Adicionar elementos de título e conteúdo à div do item
+                    itemDiv.appendChild(tituloElemento);
+                    itemDiv.appendChild(conteudoElemento);
+                    // Adicionar a div do item à div de resultados
+                    resultadosDiv.appendChild(itemDiv);                  
+                    itemDiv.style.borderBottom = '1px solid #ccc';                   
+                });
+            })
+            .catch(error => console.error('Erro:', error));
         });      
     </script>
 </body>
