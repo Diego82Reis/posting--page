@@ -145,6 +145,9 @@ button:hover {
 #conteudo-renderizar {
     color: #555;
 }
+#div-renderizar {
+    border-bottom: 1px solid #ccc;
+}
 .article-post {
     display: none; /* Inicialmente oculto */
     background-color: #fff; /* Fundo branco */

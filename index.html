@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postagem Simulada</title>
+    <title>Postagem</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -35,25 +35,15 @@
             </form>
         </section>
         <article class="article-post" id="articleRender">
-            <div>
+            <div id="div-renderizar">
                 <h2 id="titulo-renderizar"></h2>
                 <p id="conteudo-renderizar"></p>
-            </div>
-            <!-- <div class="icons">
-                <i class="far fa-thumbs-up" onclick="incrementCounter('like')"></i>
-                <span id="likeCounter" class="counter">0</span>
-
-                <i class="far fa-heart" onclick="incrementCounter('heart')"></i>
-                <span id="heartCounter" class="counter">0</span>
-
-                <i class="far fa-smile" onclick="incrementCounter('smile')"></i>
-                <span id="smileCounter" class="counter">0</span> -->
             </div>
         </article>
     </main>
 
     <footer>
-        <p>&copy; 2023 Seu Nome. Todos os direitos reservados.</p>
+        <p>&copy; 2023 Diego Reis. Todos os direitos reservados.</p>
     </footer>
 
     <script>
@@ -113,7 +103,7 @@
                 conteudoRenderizar.innerHTML = data.body;
             })
             .catch(error => console.error('Erro ao postar:', error));
-
+            //receber dados API
             fetch('https://jsonplaceholder.typicode.com/posts')
                 .then(response => response.json())
                 .then(data => {
@@ -126,10 +116,12 @@
                     // Adicionar título como um elemento de cabeçalho (h2, por exemplo)
                     const tituloElemento = document.createElement('h2');
                     tituloElemento.textContent = item.title;
+                    tituloElemento.id = 'titulo-renderizar';
 
                     // Adicionar conteúdo como um parágrafo (p, por exemplo)
                     const conteudoElemento = document.createElement('p');
                     conteudoElemento.textContent = item.body;
+                    conteudoElemento.id = 'conteudo-renderizar';
 
                     // Adicionar elementos de título e conteúdo à div do item
                     itemDiv.appendChild(tituloElemento);
@@ -137,6 +129,11 @@
 
                     // Adicionar a div do item à div de resultados
                     resultadosDiv.appendChild(itemDiv);
+
+                   
+                    itemDiv.style.borderBottom = '1px solid #ccc';
+                    
+
                     });
                 })
                 .catch(error => console.error('Erro:', error));
