@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postagem Simulada</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Página Inicial</a></li>
+                <li><a href="#">Perfil</a></li>
+                <li><a href="#">Configurações</a></li>
+                <li><a href="#">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="postSection">
+        <section class="principal" >
+            <h1 id="titulo-h1">Crie sua Postagem</h1>
+
+            <form id="postForm">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+
+                <label for="conteudo">Conteúdo:</label>
+                <textarea id="conteudo" required></textarea>
+
+                <button type="submit">Postar</button>
+            </form>
+        </section>
+        <article class="article-post" id="articleRender">
+            <h2 id="titulo-renderizar"></h2>
+            <p id="conteudo-renderizar"></p>
+            <div class="icons">
+                <i class="far fa-thumbs-up" onclick="incrementCounter('like')"></i>
+                <span id="likeCounter" class="counter">0</span>
+
+                <i class="far fa-heart" onclick="incrementCounter('heart')"></i>
+                <span id="heartCounter" class="counter">0</span>
+
+                <i class="far fa-smile" onclick="incrementCounter('smile')"></i>
+                <span id="smileCounter" class="counter">0</span>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+
+        document.getElementById('postForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Restante do código JS permanece o mesmo...
+
+            // Após o envio do post, mova a seção para a esquerda
+            document.getElementById('postSection').classList.add('move-to-left');
+        });
+
+        document.querySelector("#postForm").addEventListener('submit', event => {
+            event.preventDefault();
+
+            // Obter valores do formulário
+            const titulo = document.querySelector("#titulo").value;
+            const conteudo = document.querySelector("#conteudo").value;
+
+            const postSection = document.querySelector("#postSection");
+            postSection.classList.add('move-to-left');
+
+            const articleRender = document.querySelector("#articleRender");
+            articleRender.style.display = 'block';
+
+            // 
+            const API = "https://jsonplaceholder.typicode.com/posts";
+
+            // Requisição POST
+            fetch(API, {
+                method: 'POST',
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+                body: JSON.stringify({
+                    title: titulo,
+                    body: conteudo,
+                    userId: 1, 
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Renderizar o título e conteúdo do post retornado pela API
+                document.querySelector("#titulo-renderizar").textContent = data.title;
+                document.querySelector("#conteudo-renderizar").textContent = data.body;
+               
+            })
+            .then(data => {
+                // Renderizar o título e conteúdo do post retornado pela API
+                const tituloRenderizar = document.querySelector("#titulo-renderizar");
+                const conteudoRenderizar = document.querySelector("#conteudo-renderizar");
+                newPostDiv.classList.add('post');
+                newPostDiv.innerHTML = `
+                    <h2 id="titulo-renderizar">${data.title}</h2>
+                    <p id="conteudo-renderizar">${data.body}</p>
+                `;
+                tituloRenderizar.innerHTML = data.title;
+                conteudoRenderizar.innerHTML = data.body;
+            })
+            .catch(error => console.error('Erro ao postar:', error));
+        });
+        
+        document.getElementById('postForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Restante do código JS permanece o mesmo...
+
+            // Após o envio do post, mova a seção para a esquerda e exiba o article
+            const postSection = document.getElementById('postSection');
+            postSection.classList.add('move-to-left');
+        });
+
+        let likeCount = 0;
+        let heartCount = 0;
+        let smileCount = 0;
+
+        function incrementCounter(type) {
+            switch (type) {
+                case 'like':
+                    likeCount++;
+                    document.getElementById('likeCounter').textContent = likeCount;
+                    break;
+                case 'heart':
+                    heartCount++;
+                    document.getElementById('heartCounter').textContent = heartCount;
+                    break;
+                case 'smile':
+                    smileCount++;
+                    document.getElementById('smileCounter').textContent = smileCount;
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
