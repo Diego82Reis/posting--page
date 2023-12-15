@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postagem</title>
-
+    <title>Projeto de certificação 2 – Postagem de blog</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
     <header>
@@ -19,18 +17,14 @@
             </ul>
         </nav>
     </header>
-
     <main id="postSection">
         <section class="principal" >
             <h1 id="titulo-h1">Crie sua Postagem</h1>
-
             <form id="postForm">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" required>
-
                 <label for="conteudo">Conteúdo:</label>
                 <textarea id="conteudo" required></textarea>
-
                 <button type="submit">Postar</button>
             </form>
         </section>
@@ -41,38 +35,50 @@
             </div>
         </article>
     </main>
-
     <footer>
         <p>&copy; 2023 Diego Reis. Todos os direitos reservados.</p>
     </footer>
-
     <script>
-
-        document.getElementById('postForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Restante do código JS permanece o mesmo...
-
-            // Após o envio do post, mova a seção para a esquerda
-            document.getElementById('postSection').classList.add('move-to-left');
+        function chamarAPI() {//recebe dados API
+            fetch('https://jsonplaceholder.typicode.com/posts')
+                .then(response => response.json())
+                .then(data => {
+                    const resultadosDiv = document.querySelector("#articleRender");
+                    data.forEach(item => {
+                        // Criar uma nova div para cada item
+                        const itemDiv = document.createElement('div');
+                        // Adicionar título como um elemento de cabeçalho (h2, por exemplo)
+                        const tituloElemento = document.createElement('h2');
+                        tituloElemento.textContent = item.title;
+                        tituloElemento.id = 'titulo-renderizar';
+                        // Adicionar conteúdo como um parágrafo (p, por exemplo)
+                        const conteudoElemento = document.createElement('p');
+                        conteudoElemento.textContent = item.body;
+                        conteudoElemento.id = 'conteudo-renderizar';
+                        // Adicionar elementos de título e conteúdo à div do item
+                        itemDiv.appendChild(tituloElemento);
+                        itemDiv.appendChild(conteudoElemento);
+                        // Adicionar a div do item à div de resultados
+                        resultadosDiv.appendChild(itemDiv);                  
+                        itemDiv.style.borderBottom = '1px solid #ccc';                   
+                    });
+                })
+                .catch(error => console.error('Erro:', error));
+        }           
+        document.addEventListener('DOMContentLoaded', function() {
+            chamarAPI();
         });
-
         document.querySelector("#postForm").addEventListener('submit', event => {
             event.preventDefault();
-
             // Obter valores do formulário
             const titulo = document.querySelector("#titulo").value;
             const conteudo = document.querySelector("#conteudo").value;
-
             const postSection = document.querySelector("#postSection");
             postSection.classList.add('move-to-left');
-
             const articleRender = document.querySelector("#articleRender");
             articleRender.style.display = 'block';
-
             // 
             const API = "https://jsonplaceholder.typicode.com/posts";
-
             // Requisição POST
             fetch(API, {
                 method: 'POST',
@@ -87,8 +93,7 @@
             .then(data => {
                 // Renderizar o título e conteúdo do post retornado pela API
                 document.querySelector("#titulo-renderizar").textContent = data.title;
-                document.querySelector("#conteudo-renderizar").textContent = data.body;
-               
+                document.querySelector("#conteudo-renderizar").textContent = data.body;              
             })
             .then(data => {
                 // Renderizar o título e conteúdo do post retornado pela API
@@ -103,74 +108,8 @@
                 conteudoRenderizar.innerHTML = data.body;
             })
             .catch(error => console.error('Erro ao postar:', error));
-            //receber dados API
-            fetch('https://jsonplaceholder.typicode.com/posts')
-                .then(response => response.json())
-                .then(data => {
-                    const resultadosDiv = document.querySelector("#articleRender");
-
-                    data.forEach(item => {
-                    // Criar uma nova div para cada item
-                    const itemDiv = document.createElement('div');
-
-                    // Adicionar título como um elemento de cabeçalho (h2, por exemplo)
-                    const tituloElemento = document.createElement('h2');
-                    tituloElemento.textContent = item.title;
-                    tituloElemento.id = 'titulo-renderizar';
-
-                    // Adicionar conteúdo como um parágrafo (p, por exemplo)
-                    const conteudoElemento = document.createElement('p');
-                    conteudoElemento.textContent = item.body;
-                    conteudoElemento.id = 'conteudo-renderizar';
-
-                    // Adicionar elementos de título e conteúdo à div do item
-                    itemDiv.appendChild(tituloElemento);
-                    itemDiv.appendChild(conteudoElemento);
-
-                    // Adicionar a div do item à div de resultados
-                    resultadosDiv.appendChild(itemDiv);
-
-                   
-                    itemDiv.style.borderBottom = '1px solid #ccc';
-                    
-
-                    });
-                })
-                .catch(error => console.error('Erro:', error));
-        });
-        
-        document.getElementById('postForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Restante do código JS permanece o mesmo...
-
-            // Após o envio do post, mova a seção para a esquerda e exiba o article
-            const postSection = document.getElementById('postSection');
-            postSection.classList.add('move-to-left');
-        });
-
-        let likeCount = 0;
-        let heartCount = 0;
-        let smileCount = 0;
-
-        function incrementCounter(type) {
-            switch (type) {
-                case 'like':
-                    likeCount++;
-                    document.getElementById('likeCounter').textContent = likeCount;
-                    break;
-                case 'heart':
-                    heartCount++;
-                    document.getElementById('heartCounter').textContent = heartCount;
-                    break;
-                case 'smile':
-                    smileCount++;
-                    document.getElementById('smileCounter').textContent = smileCount;
-                    break;
-                default:
-                    break;
-            }
-        }
+            chamarAPI();
+        });      
     </script>
 </body>
 </html>

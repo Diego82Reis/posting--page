@@ -161,29 +161,6 @@ button:hover {
     margin: 0 auto;
 }
 
-
-.icons {
-    margin-top: 10px;
-}
-
-.icons i {
-    font-size: 24px;
-    margin-right: 10px;
-    color: #333;
-    transition: color 0.3s;
-    cursor: pointer;
-}
-
-.icons i:hover {
-    color: #4caf50;
-}
-
-.counter {
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 14px;
-    color: #777;
-}
 footer {
     background-color: #000; /* Cor de fundo preto */
     color: #fff; /* Cor do texto branco */
