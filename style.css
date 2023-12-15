@@ -41,7 +41,7 @@ header {
     text-align: center;
     margin: 0 auto; /* Centraliza a section horizontalmente */
     transition: margin-left 0.5s ease-in-out; /* Adiciona uma transição suave ao movimento */
-    height: 78vh;
+    height: auto;
 }
 
 
